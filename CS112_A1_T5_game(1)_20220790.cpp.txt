@@ -1,0 +1,49 @@
+// progrom: The game is played by two
+players, who take turns adding a number between 1 and 10 the first player to make the sum reach 100 wins the game (game 1)
+// Anuthor: Fatima Ibrahim idris 20220790
+// version : 1.0
+// data: 2/ 2/2024
+#include <iostream>
+#include <limits>
+
+int main() {
+    int sum = 0;
+    unsigned int rounds = 0;
+    bool player = true;
+
+    while (sum < 100) {
+        int num;
+        std::cout << "Player " << (player ? 1 : 2) << ", round " << rounds+1 << ", enter a number from 1 to 10: ";
+        std::cin >> num;
+
+        if (std::cin.fail()) {
+            std::cout << "Invalid input. Please enter a number from 1 to 10." << std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            continue;
+        }
+
+        if (num < 1 || num > 10) {
+            std::cout << "Number is out of range. Please enter a number from 1 to 10." << std::endl;
+            continue;
+        }
+
+        if (sum + num > 100) {
+            std::cout << "Number is too large. Please enter a number from 1 to " << 100 - sum << "." << std::endl;
+            continue;
+        }
+
+        sum += num;
+        rounds++;
+        std::cout << "Sum: " << sum << std::endl;
+
+        if (sum >= 100) {
+            std::cout << "Player " << (player ? 1 : 2) << " wins!" << std::endl;
+            break;
+        }
+
+        player = !player;
+    }
+
+    return 0;
+}
